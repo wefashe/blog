@@ -9,12 +9,12 @@ var webpackConfig = {
     filename: 'index_bundle.js'
   },
   plugins: [new HtmlWebpackPlugin({
-      title: '你好',
-      favicon: 'favicon.ico',
+      title: 'wefashe的博客',
+      favicon: path.join(__dirname, 'static/favicon.ico'),
       filename: 'index.html',
       hash: true,
       // template:'template.html',
-      showErrors:true
+      showErrors: true
     }),
     new CleanWebpackPlugin(['dist'])
   ]
