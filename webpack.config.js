@@ -55,7 +55,7 @@ var webpackConfig = {
       showErrors: true,
       inject: 'head', //js插入的位置，true/'head'/'body'/false
       minify: {
-        // collapseWhitespace: true, //去掉html的空格
+        collapseWhitespace: true, //去掉html的空格
       },
     }),
     new CleanWebpackPlugin(['dist']),

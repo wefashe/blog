@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "dev": "webpack-dev-server --mode development",
-        "build1123": "webpack --mode production",
+        "build123": "webpack --mode production",
         "build": "webpack --mode development",
         "deploy": "gh-pages -d dist"
     },
