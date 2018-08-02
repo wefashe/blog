@@ -6,7 +6,7 @@ var webpackConfig = {
   entry: path.join(__dirname, 'src/index.js'),
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'index_bundle.js'
+    filename: 'index.js'
   },
   plugins: [new HtmlWebpackPlugin({
       title: 'wefashe的博客',
