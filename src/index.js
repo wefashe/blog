@@ -10,30 +10,30 @@ import Vue from 'vue';
 // import App from './App.vue';
 
 //导入全局样式
-// import './assets/styles/global.less';
+import './assets/styles/global.less';
 
 // Vue.use(ElementUI);
 // Vue.use(VueRouter);
 // Vue.use(iView);
 
-// const root = document.createElement('div');
-// document.body.appendChild(root);
+const root = document.createElement('div');
+document.body.appendChild(root);
 
-// new Vue({
-//     render:(h)=>h(App)
-// }).$mount(root);
+new Vue({
+    render:(h)=>h(App)
+}).$mount(root);
 
-const path = require('path');
+// const path = require('path');
 
-console.log(path.join('/a', '/b'));
-console.log(path.resolve('/a', '/b'));
+// console.log(path.join('/a', '/b'));
+// console.log(path.resolve('/a', '/b'));
 
 
-console.log(path.join('a', 'b'));
-console.log(path.resolve('a', 'b'));
+// console.log(path.join('a', 'b'));
+// console.log(path.resolve('a', 'b'));
 
-console.log(path.join('a', '/b'));
-console.log(path.resolve('a', '/b'));
+// console.log(path.join('a', '/b'));
+// console.log(path.resolve('a', '/b'));
 
-console.log(path.join('/a', '/b'));
-console.log(path.resolve('/a', '/b'));
+// console.log(path.join('/a', '/b'));
+// console.log(path.resolve('/a', '/b'));
