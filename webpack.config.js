@@ -1,5 +1,6 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const webpack = require('webpack');
 const path = require('path');
 
@@ -53,11 +54,12 @@ var webpackConfig = {
       hash: true,
       // template:'template.html',
       showErrors: true,
-      inject: 'head', //js插入的位置，true/'head'/'body'/false
+      // inject: 'head', //js插入的位置，true/'head'/'body'/false
       minify: {
-        collapseWhitespace: true, //去掉html的空格
+        // collapseWhitespace: true, //去掉html的空格
       },
     }),
+    new VueLoaderPlugin(),
     new CleanWebpackPlugin(['dist']),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),

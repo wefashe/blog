@@ -7,7 +7,7 @@ import Vue from 'vue';
 // import Routers from './router.js';
 // import iView from 'iview';
 // import 'iview/dist/styles/iview.css';
-// import App from './App.vue';
+import App from './App.vue';
 
 //导入全局样式
 import './assets/styles/global.less';
