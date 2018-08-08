@@ -1,45 +1,43 @@
 <template>
-  <div>
-    <li class="text" v-for="result in results">{{result.title}}</li>
-  </div>
+    <div class="wrap">
+        <Header></Header>
+        <div class="content">
+            <Loading></Loading>
+            <router-view></router-view>
+        </div>
+        <Footer></Footer>
+    </div>
 </template>
 
 <script>
-import axios from "axios";
-
+import Header from "@/components/header";
+import Footer from "@/components/footer";
+import Loading from "@/components/loading";
 export default {
   data: function() {
     return {
-      results: [],
+      isShow: true,
+      msg: "Loading..."
     };
   },
-  mounted: function() {
-    this.getPosts();
-  },
-  methods: {
-    getPosts: function() {
-      axios
-        .get("https://api.github.com/repos/xufei/blog/issues")
-        .then(response => {
-          this.results = response.data;
-        });
-      // axios
-      //   .get("https://api.github.com/repos/xufei/blog/issues")
-      //   .then(function(response) {
-      //     console.log(response); //请求正确时执行的代码
-      //   })
-      //   .catch(function(response) {
-      //     console.log(response); //发生错误时执行的代码
-      //   });
-    }
+  components: {
+    Header,
+    Footer,
+    Loading
   }
 };
 </script>
 
 <style lang='less' scoped>
-.text {
-  font-size: 25px;
-  color: yellow;
-  font-family: 'Courier New', Courier, monospace;
+.wrap {
+  width: 60%;
+  margin: 0 auto;
+  padding: 5px 5px;
+  background-color: #fff;
+}
+.content {
+  border: 1px solid #d1d5da;
+  border-radius: 3px;
+  border-color: #c0d3eb;
 }
 </style>

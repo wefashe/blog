@@ -2,14 +2,27 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const webpack = require('webpack');
+// const config = require('./src/util/config');
+// import config from './src/util/config';
 const path = require('path');
+
+var config = {
+  username: 'wefashe',
+  nickname: 'Wenfs'
+};
 
 var webpackConfig = {
   devtool: 'source-map',
-  entry: path.join(__dirname, 'src/index.js'),
+  entry: path.join(__dirname, 'src/main.js'),
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[hash].js'
+  },
+  resolve:{
+    extensions:['.vue','.js', '.json'],
+    alias:{
+      '@':path.resolve('src')
+    }
   },
   module: {
     rules: [{
@@ -48,12 +61,12 @@ var webpackConfig = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Wenfs's Blog",
+      title: (config.nickname || config.username) + "'s Blog",
       favicon: path.join(__dirname, 'static/favicon.ico'),
-      filename: 'index.html',
-      hash: true,
+      // filename: 'index.html',
+      // hash: true,
       // template:'template.html',
-      showErrors: true,
+      // showErrors: true,
       // inject: 'head', //js插入的位置，true/'head'/'body'/false
       minify: {
         // collapseWhitespace: true, //去掉html的空格
