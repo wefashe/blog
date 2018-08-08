@@ -1,5 +1,7 @@
 //导入所有接口
-import apiList from '@/fetch/interface'
+import Vue from 'vue';
+import apiList from '@/fetch/fetch'
+
 const install = Vue => {
     if (install.installed)
         return;
@@ -14,5 +16,5 @@ const install = Vue => {
         }
     })
 }
-
-export default install
+Vue.use(install);
+// export default install

@@ -2,7 +2,7 @@
     <div class="wrap">
         <Header></Header>
         <div class="content">
-            <Loading></Loading>
+            <Loading v-show="showLoading"></Loading>
             <router-view></router-view>
         </div>
         <Footer></Footer>
@@ -13,18 +13,16 @@
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import Loading from "@/components/loading";
+import {mapGetters} from 'vuex';
 export default {
-  data: function() {
-    return {
-      isShow: true,
-      msg: "Loading..."
-    };
-  },
   components: {
     Header,
     Footer,
     Loading
-  }
+  },
+  computed:mapGetters([
+    'showLoading'
+  ]),
 };
 </script>
 

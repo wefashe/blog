@@ -1,4 +1,5 @@
 import axios from 'axios';
+import store from '@/vuex/store';
 // import qs from 'qs';
 // import config from '@/config';
 // axios.defaults.baseURL = 'https://api.github.com/repos/'
@@ -11,19 +12,17 @@ axios.defaults.timeout = 10000
 
 // 添加请求拦截器
 axios.interceptors.request.use(config => {
-
+    store.dispatch('showloader');
     return config;
 }, error => {
-
     return Promise.reject(error);
 });
 
 // 添加响应拦截器
 axios.interceptors.response.use(response => {
-
+    store.dispatch('hideloader');
     return response;
 }, error => {
-
     return Promise.reject(error);
 });
 
@@ -66,3 +65,18 @@ axios.interceptors.response.use(response => {
 //         Object.defineProperty(Vue.prototype, "$axios", {value: Axios});
 //     }
 // };
+
+// 单独导出
+export const query = () => {
+    return axios({
+        url: 'https://api.github.com/repos/wefashe/blog/issues',
+        method: 'get'
+    })
+}
+
+
+
+// 默认全部导出
+export default {
+    query
+}

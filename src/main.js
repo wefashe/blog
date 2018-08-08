@@ -7,15 +7,16 @@ import Vue from 'vue';
 // import Routers from './router.js';
 // import iView from 'iview';
 // import 'iview/dist/styles/iview.css';
-import App from './App.vue';
-import router from './router/router';
+import App from '@/App.vue';
+import router from '@/router/router';
 import api from '@/fetch/index';
+import store from '@/vuex/store';
 // import axios from 'axios';
 // Vue.prototype.$axios = axios;
 
 //导入全局样式
-import './assets/styles/global.less';
-Vue.use(api);
+import '@/assets/styles/global.less';
+// Vue.use(api);
 // Vue.use(ElementUI);
 // Vue.use(VueRouter);
 // Vue.use(iView);
@@ -24,6 +25,7 @@ const root = document.createElement('div');
 document.body.appendChild(root);
 
 new Vue({
+    store:store,
     router:router,
     render:(h)=>h(App)
 }).$mount(root);

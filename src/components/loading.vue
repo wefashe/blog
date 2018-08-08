@@ -9,7 +9,7 @@
         name: "",
         data() {
             return {
-                show:false,
+                show:true,
                 msg:" 加载中，请稍后...",
             };
         }
