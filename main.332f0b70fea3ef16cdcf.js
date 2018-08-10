@@ -65,7 +65,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "89bd5d419fc541c83551";
+/******/ 	var hotCurrentHash = "332f0b70fea3ef16cdcf";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -2490,8 +2490,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 
@@ -2684,7 +2682,14 @@ __webpack_require__.r(__webpack_exports__);
         var date = new Date(date);
         return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
       }
+    },
+    load() {
+      store.dispatch('showloader');
     }
+  },
+  beforeRouteLeave(to, from, next) {
+    // to.meta.keepAlive = true;
+    next();
   }
 });
 
@@ -2739,6 +2744,10 @@ __webpack_require__.r(__webpack_exports__);
         return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
       }
     }
+  },
+  beforeRouteLeave(to, from, next) {
+    // to.meta.keepAlive = false;
+    next();
   }
 });
 
@@ -24665,7 +24674,13 @@ var render = function() {
             ]
           }),
           _vm._v(" "),
-          _c("keep-alive", [_c("router-view")], 1)
+          _c(
+            "keep-alive",
+            [_vm.$route.meta.keepAlive ? _c("router-view") : _vm._e()],
+            1
+          ),
+          _vm._v(" "),
+          !_vm.$route.meta.keepAlive ? _c("router-view") : _vm._e()
         ],
         1
       ),
@@ -24730,18 +24745,18 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "header",
+    { staticClass: "header" },
+    [
+      _c("router-link", { attrs: { to: "/" } }, [
+        _c("div", { staticClass: "title" }, [_vm._v("我是头部")])
+      ])
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("header", { staticClass: "header" }, [
-      _c("div", { staticClass: "title" }, [_vm._v("我是头部")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -24842,7 +24857,8 @@ var render = function() {
       _vm._v(" "),
       _c("div", {
         staticClass: "d-block comment-body markdown-body  js-comment-body",
-        domProps: { innerHTML: _vm._s(_vm.marked(_vm.detail.body)) }
+        domProps: { innerHTML: _vm._s(_vm.marked(_vm.detail.body)) },
+        on: { load: _vm.load }
       })
     ])
   ])
@@ -37744,15 +37760,15 @@ const router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
         name: 'list',
         component: _pages_list__WEBPACK_IMPORTED_MODULE_2__["default"],
         meta: {
-            // keepAlive: true,
+            keepAlive: true,
             title: document.title
             // scrollToTop: true
         }
     }, {
         path: '/detail',
         name: 'detail',
-        component: _pages_detail__WEBPACK_IMPORTED_MODULE_3__["default"]
-        // meta:{keepAlive:false}
+        component: _pages_detail__WEBPACK_IMPORTED_MODULE_3__["default"],
+        meta: { keepAlive: false }
     }, {
         path: '*',
         component: _pages_NotFound__WEBPACK_IMPORTED_MODULE_4__["default"]
@@ -37877,4 +37893,4 @@ const HIDELOADING = 'HIDELOADING';
 /***/ })
 
 /******/ });
-//# sourceMappingURL=main.89bd5d419fc541c83551.js.map
+//# sourceMappingURL=main.332f0b70fea3ef16cdcf.js.map
