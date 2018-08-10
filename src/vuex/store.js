@@ -1,14 +1,12 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import actions from '@/vuex/actions.js'
-import mutations from '@/vuex/mutations.js'
+import loading from '@/vuex/modules/loading';
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
     modules: {
-        mutations
+        loading,
     },
-    actions
 })

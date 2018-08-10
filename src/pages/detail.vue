@@ -1,9 +1,12 @@
 <template>
     <div>
         <article class="post">
-            <h2><a class="title">{{title}}</a></h2>
-            <span class="time">{{time}}</span>
-            <div class="d-block comment-body markdown-body  js-comment-body" v-html="body"></div>
+            <h2>{{detail.title}}</h2>
+             <span class="create_at">
+            <a v-bind:href="detail.html_url">
+              <img width="40" height="40" v-bind:src="user.avatar_url" class="avatar">{{user.login}}</a>.
+        发表于 {{formatDate(detail.created_at)}},最后修改于{{formatDate(detail.updated_at)}}</span>
+            <div v-on:load="load" class="d-block comment-body markdown-body  js-comment-body" v-html="marked(detail.body)"></div>
         </article>
     </div>
 </template>
@@ -11,83 +14,62 @@
 <script>
 import marked from "marked";
 import hljs from "highlight.js";
-// import 'highlight.js/styles/default.css';
-// import 'highlight.js/styles/googlecode.css'
 import "highlight.js/styles/atom-one-dark.css";
-// let marked = require('marked');
-// let hljs = require('highlight.js');
-// import 'highlight.js/styles/default.css';
-// const highlightCode = () => {
-//     const preEl = document.querySelectorAll('pre')
 
-//     preEl.forEach((el) => {
-//         hljs.highlightBlock(el);
-//         el.a
-//     })
-// };
-marked.setOptions({
-  renderer: new marked.Renderer(),
-  gfm: true,
-  tables: true,
-  breaks: true,
-  pedantic: false,
-  sanitize: false,
-  smartLists: true,
-  smartypants: false,
-  highlight: function(code, lang) {
-    if (lang && hljs.getLanguage(lang)) {
-      return hljs.highlight(lang, code, true).value;
-    } else {
-      return hljs.highlightAuto(code).value;
-    }
-  }
-});
-//
-// marked.setOptions({
-//     renderer: new marked.Renderer(),
-//     highlight: function(code) {
-//         return require('highlight.js').highlightAuto(code).value;
-//     },
-//     pedantic: false,
-//     gfm: true,//启动Github样式的Markdown
-//     tables: true,// 支持Github表格，必须打开gfm选项
-//     breaks: false,//支持Github换行符，必须打开gfm选项
-//     sanitize: false,//原始输出，忽略HTML标签
-//     smartLists: true,//优化列表输出
-//     smartypants: false,
-//     xhtml: false
-// });
 export default {
   data() {
     return {
-      title: "",
-      time: "",
-      body: ""
+      detail: {},
+      user: {}
     };
   },
   mounted() {
     this.getDetail();
   },
-  updated() {
-    // highlightCode();
-  },
   methods: {
     getDetail() {
-      // hljs.initHighlightingOnLoad();
-      // highlightCode();
-      this.$api
-        .query()
-        .then(response => {
-          // console.log(response.data[0].body);
-          this.title = response.data[0].title;
-          this.body = marked(response.data[0].body || "", {
-            sanitize: true
-          });
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    }
+      this.detail = this.$route.query;
+      this.user = this.$route.query.user;
+    },
+    marked(md) {
+      marked.setOptions({
+        renderer: new marked.Renderer(),
+        gfm: true, //启动Github样式的Markdown
+        tables: true, // 支持Github表格，必须打开gfm选项
+        breaks: true, //支持Github换行符，必须打开gfm选项
+        pedantic: false,
+        sanitize: false, //原始输出，忽略HTML标签
+        smartLists: true, //优化列表输出
+        smartypants: false,
+        highlight: function(code, lang) {
+          if (lang && hljs.getLanguage(lang)) {
+            return hljs.highlight(lang, code, true).value;
+          } else {
+            return hljs.highlightAuto(code).value;
+          }
+        }
+      });
+      return marked(md || "", { sanitize: true });
+    },
+    formatDate(date) {
+      if (date != null) {
+        var date = new Date(date);
+        return (
+          date.getFullYear() +
+          "-" +
+          (date.getMonth() + 1) +
+          "-" +
+          date.getDate()
+        );
+      }
+    },
+    load(){
+      store.dispatch('showloader');
+    },
+  },
+  beforeRouteLeave(to, from, next) {
+    // to.meta.keepAlive = true;
+    next();
   }
 };
 </script>
@@ -139,16 +121,6 @@ export default {
   padding: 0 1em;
   color: #6a737d;
   border-left: 0.25em solid #dfe2e5;
-}
-
-h2 {
-  display: block;
-  font-size: 1.5em;
-  -webkit-margin-before: 0.83em;
-  -webkit-margin-after: 0.83em;
-  -webkit-margin-start: 0px;
-  -webkit-margin-end: 0px;
-  font-weight: bold;
 }
 
 // .markdown-body code {

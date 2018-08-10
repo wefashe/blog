@@ -1,5 +1,6 @@
 import axios from 'axios';
 import store from '@/vuex/store';
+import config from '@/fetch/config'
 // import qs from 'qs';
 // import config from '@/config';
 // axios.defaults.baseURL = 'https://api.github.com/repos/'
@@ -7,25 +8,28 @@ import store from '@/vuex/store';
 // axios.defaults.headers = {
 //     'X-Requested-With': 'XMLHttpRequest'
 // }
-axios.defaults.timeout = 10000
+
+const instance = axios.create(config);
+// axios.defaults.timeout = 10000
 
 
 // 添加请求拦截器
-axios.interceptors.request.use(config => {
+instance.interceptors.request.use(request => {
     store.dispatch('showloader');
-    return config;
+    return request;
 }, error => {
     return Promise.reject(error);
 });
 
 // 添加响应拦截器
-axios.interceptors.response.use(response => {
+instance.interceptors.response.use(response => {
     store.dispatch('hideloader');
     return response;
 }, error => {
     return Promise.reject(error);
 });
 
+export default instance;
 
 // // 封装请求
 // export function fetch(url, options) {
@@ -67,16 +71,16 @@ axios.interceptors.response.use(response => {
 // };
 
 // 单独导出
-export const query = () => {
-    return axios({
-        url: 'https://api.github.com/repos/wefashe/blog/issues',
-        method: 'get'
-    })
-}
+// export const query = () => {
+//     return axios({
+//         url: 'https://api.github.com/repos/lifesinger/blog/issues',
+//         method: 'get'
+//     })
+// }
 
 
 
-// 默认全部导出
-export default {
-    query
-}
+// // 默认全部导出
+// export default {
+//     query
+// }

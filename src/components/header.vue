@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-      <div class="title">我是头部</div>   
+      <router-link to="/"><div class="title">我是头部</div> </router-link>  
   </header>
 </template>
 

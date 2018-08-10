@@ -63,9 +63,9 @@ var webpackConfig = {
     new HtmlWebpackPlugin({
       title: (config.nickname || config.username) + "'s Blog",
       favicon: path.join(__dirname, 'static/favicon.ico'),
-      // filename: 'index.html',
+      filename: 'index.html',
       // hash: true,
-      // template:'template.html',
+      template:'index.html',
       // showErrors: true,
       // inject: 'head', //js插入的位置，true/'head'/'body'/false
       minify: {
@@ -80,6 +80,7 @@ var webpackConfig = {
   ],
   devServer: {
     host: '127.0.0.1',
+    // host: '0.0.0.0',
     port: 8080,
     overlay: {
       //出现bug时，实时显示在网页上
