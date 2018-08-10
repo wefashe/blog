@@ -65,7 +65,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "6f5fb250a12ccd770b65";
+/******/ 	var hotCurrentHash = "89bd5d419fc541c83551";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -2636,6 +2636,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -2644,7 +2647,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data() {
     return {
-      detail: {}
+      detail: {},
+      user: {}
     };
   },
   mounted() {
@@ -2653,6 +2657,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getDetail() {
       this.detail = this.$route.query;
+      this.user = this.$route.query.user;
     },
     marked(md) {
       marked__WEBPACK_IMPORTED_MODULE_0___default.a.setOptions({
@@ -2673,6 +2678,12 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
       return marked__WEBPACK_IMPORTED_MODULE_0___default()(md || "", { sanitize: true });
+    },
+    formatDate(date) {
+      if (date != null) {
+        var date = new Date(date);
+        return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+      }
     }
   }
 });
@@ -2713,11 +2724,20 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getList() {
-      this.$api.query().then(response => {
+      this.$api.issue.query().then(response => {
         this.list = response.data;
+        this.list.sort(function (a, b) {
+          return a.updated_at < b.updated_at ? 1 : -1;
+        });
       }).catch(error => {
         console.log(error);
       });
+    },
+    formatDate(date) {
+      if (date != null) {
+        var date = new Date(date);
+        return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+      }
     }
   }
 });
@@ -24645,7 +24665,7 @@ var render = function() {
             ]
           }),
           _vm._v(" "),
-          _c("router-view")
+          _c("keep-alive", [_c("router-view")], 1)
         ],
         1
       ),
@@ -24804,7 +24824,21 @@ var render = function() {
     _c("article", { staticClass: "post" }, [
       _c("h2", [_vm._v(_vm._s(_vm.detail.title))]),
       _vm._v(" "),
-      _c("span", { staticClass: "time" }, [_vm._v(_vm._s(_vm.detail.time))]),
+      _c("span", { staticClass: "create_at" }, [
+        _c("a", { attrs: { href: _vm.detail.html_url } }, [
+          _c("img", {
+            staticClass: "avatar",
+            attrs: { width: "40", height: "40", src: _vm.user.avatar_url }
+          }),
+          _vm._v(_vm._s(_vm.user.login))
+        ]),
+        _vm._v(
+          ".\n    发表于 " +
+            _vm._s(_vm.formatDate(_vm.detail.created_at)) +
+            ",最后修改于" +
+            _vm._s(_vm.formatDate(_vm.detail.updated_at))
+        )
+      ]),
       _vm._v(" "),
       _c("div", {
         staticClass: "d-block comment-body markdown-body  js-comment-body",
@@ -24853,7 +24887,7 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("span", { staticClass: "time" }, [
-            _vm._v(_vm._s(new Date(item.updated_at).toLocaleDateString()))
+            _vm._v(_vm._s(_vm.formatDate(item.updated_at)))
           ])
         ],
         1
@@ -37101,19 +37135,50 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/fetch/fetch.js":
-/*!****************************!*\
-  !*** ./src/fetch/fetch.js ***!
-  \****************************/
-/*! exports provided: query, default */
+/***/ "./src/fetch/config.js":
+/*!*****************************!*\
+  !*** ./src/fetch/config.js ***!
+  \*****************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "query", function() { return query; });
+/* harmony default export */ __webpack_exports__["default"] = ({
+    // method: 'get',
+    // 基础url前缀
+    baseURL: 'https://api.github.com/repos/lifesinger',
+    // baseURL: 'https://api.github.com/repos/wefashe',
+    // 请求头信息
+    // headers: {
+    //     'Content-Type': 'application/json;charset=UTF-8'
+    // },
+    // // 参数
+    // data: {},
+    // // 设置超时时间
+    timeout: 10000
+    // // 携带凭证
+    // withCredentials: true,
+    // // 返回数据类型
+    // responseType: 'json'
+});
+
+/***/ }),
+
+/***/ "./src/fetch/fetch.js":
+/*!****************************!*\
+  !*** ./src/fetch/fetch.js ***!
+  \****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _vuex_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/vuex/store */ "./src/vuex/store.js");
+/* harmony import */ var _fetch_config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/fetch/config */ "./src/fetch/config.js");
+
 
 
 // import qs from 'qs';
@@ -37123,23 +37188,28 @@ __webpack_require__.r(__webpack_exports__);
 // axios.defaults.headers = {
 //     'X-Requested-With': 'XMLHttpRequest'
 // }
-axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.timeout = 10000;
+
+const instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create(_fetch_config__WEBPACK_IMPORTED_MODULE_2__["default"]);
+// axios.defaults.timeout = 10000
+
 
 // 添加请求拦截器
-axios__WEBPACK_IMPORTED_MODULE_0___default.a.interceptors.request.use(config => {
+instance.interceptors.request.use(request => {
     _vuex_store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('showloader');
-    return config;
+    return request;
 }, error => {
     return Promise.reject(error);
 });
 
 // 添加响应拦截器
-axios__WEBPACK_IMPORTED_MODULE_0___default.a.interceptors.response.use(response => {
+instance.interceptors.response.use(response => {
     _vuex_store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('hideloader');
     return response;
 }, error => {
     return Promise.reject(error);
 });
+
+/* harmony default export */ __webpack_exports__["default"] = (instance);
 
 // // 封装请求
 // export function fetch(url, options) {
@@ -37181,17 +37251,18 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.interceptors.response.use(response 
 // };
 
 // 单独导出
-const query = () => {
-    return axios__WEBPACK_IMPORTED_MODULE_0___default()({
-        url: 'https://api.github.com/repos/wefashe/blog/issues',
-        method: 'get'
-    });
-};
+// export const query = () => {
+//     return axios({
+//         url: 'https://api.github.com/repos/lifesinger/blog/issues',
+//         method: 'get'
+//     })
+// }
 
-// 默认全部导出
-/* harmony default export */ __webpack_exports__["default"] = ({
-    query
-});
+
+// // 默认全部导出
+// export default {
+//     query
+// }
 
 /***/ }),
 
@@ -37205,9 +37276,10 @@ const query = () => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.runtime.esm.js");
-/* harmony import */ var _fetch_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/fetch/fetch */ "./src/fetch/fetch.js");
+/* harmony import */ var _fetch_modules_issue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/fetch/modules/issue */ "./src/fetch/modules/issue.js");
 //导入所有接口
 
+// import apiList from '@/fetch/fetch'
 
 
 const install = Vue => {
@@ -37218,13 +37290,49 @@ const install = Vue => {
         // 注意哦，此处挂载在 Vue 原型的 $api 对象上
         $api: {
             get() {
-                return _fetch_fetch__WEBPACK_IMPORTED_MODULE_1__["default"];
+                return {
+                    issue: _fetch_modules_issue__WEBPACK_IMPORTED_MODULE_1__["default"]
+                };
             }
         }
     });
 };
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(install);
 // export default install
+
+/***/ }),
+
+/***/ "./src/fetch/modules/issue.js":
+/*!************************************!*\
+  !*** ./src/fetch/modules/issue.js ***!
+  \************************************/
+/*! exports provided: query, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "query", function() { return query; });
+/* harmony import */ var _fetch_fetch__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/fetch/fetch */ "./src/fetch/fetch.js");
+// import axios from 'axios';
+
+/* 将所有接口统一起来便于维护
+ * 如果项目很大可以将 url 独立成文件，接口分成不同的模块
+ */
+
+// 单独导出
+const query = () => {};
+
+const issue = {
+    query() {
+        return Object(_fetch_fetch__WEBPACK_IMPORTED_MODULE_0__["default"])({
+            url: '/blog/issues',
+            method: 'get'
+        });
+    }
+};
+
+// 默认全部导出
+/* harmony default export */ __webpack_exports__["default"] = (issue);
 
 /***/ }),
 
@@ -37638,6 +37746,7 @@ const router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
         meta: {
             // keepAlive: true,
             title: document.title
+            // scrollToTop: true
         }
     }, {
         path: '/detail',
@@ -37647,7 +37756,17 @@ const router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     }, {
         path: '*',
         component: _pages_NotFound__WEBPACK_IMPORTED_MODULE_4__["default"]
-    }]
+    }],
+    scrollBehavior(to, from, savedPosition) {
+        if (savedPosition) {
+            return savedPosition;
+        } else {
+            return {
+                x: 0,
+                y: 0
+            };
+        }
+    }
 });
 
 router.beforeEach((to, from, next) => {
@@ -37758,4 +37877,4 @@ const HIDELOADING = 'HIDELOADING';
 /***/ })
 
 /******/ });
-//# sourceMappingURL=main.6f5fb250a12ccd770b65.js.map
+//# sourceMappingURL=main.89bd5d419fc541c83551.js.map
