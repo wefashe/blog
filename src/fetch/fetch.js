@@ -1,5 +1,5 @@
 import axios from 'axios';
-import store from '@/vuex/store';
+import store from '@/store/store';
 import config from '@/fetch/config'
 // import qs from 'qs';
 // import config from '@/config';
@@ -18,6 +18,8 @@ instance.interceptors.request.use(request => {
     store.dispatch('showloader');
     return request;
 }, error => {
+    store.dispatch('hideloader');
+    alert(error);
     return Promise.reject(error);
 });
 
@@ -26,6 +28,8 @@ instance.interceptors.response.use(response => {
     store.dispatch('hideloader');
     return response;
 }, error => {
+    store.dispatch('hideloader');
+    alert(error);
     return Promise.reject(error);
 });
 

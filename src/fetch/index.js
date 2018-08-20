@@ -1,9 +1,8 @@
-//导入所有接口
-import Vue from 'vue';
-// import apiList from '@/fetch/fetch'
 import issue from '@/fetch/modules/issue';
 
+//注册插件
 const install = Vue => {
+    // 如果已经注册过了，就跳过
     if (install.installed)
         return;
     install.installed = true;
@@ -19,5 +18,4 @@ const install = Vue => {
         }
     })
 }
-Vue.use(install);
-// export default install
+export default install

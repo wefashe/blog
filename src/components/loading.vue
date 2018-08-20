@@ -1,6 +1,6 @@
 <template>
-    <div class="loading" v-show="show">
-       {{msg}}
+    <div class="loading">
+
     </div>
 </template>
 
@@ -17,6 +17,15 @@
 </script>
 
 <style lang='less' scoped>
+    //电脑
+    @media (min-width: 992px) {
+
+    }
+
+    //手机
+    @media (max-width: 992px) {
+
+    }
     .loading{
          text-align: center;
          color: blue;

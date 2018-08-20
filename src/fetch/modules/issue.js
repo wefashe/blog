@@ -5,19 +5,35 @@ import axios from '@/fetch/fetch';
  */
 
 // 单独导出
-export const query = () => {
-
-}
+// export const query = () => {
+//
+// }
 
 const issue = {
-    query() {
+    queryList() {
         return axios({
-            url: '/blog/issues',
+            url: '/repos/lifesinger/blog/issues',
+            // url: '/repos/wefashe/blog/issues',
             method: 'get'
         })
     },
+    queryDetail(id) {
+        return axios({
+            url: '/repos/lifesinger/blog/issues/'+id,
+            method: 'get',
+        })
+    },
+    marked(text) {
+        return axios({
+            url: '/markdown',
+            method: 'post',
+            data:{
+                "text": text,
+                "mode": 'gfm',
+            }
+        })
+    },
 }
-
 
 
 // 默认全部导出

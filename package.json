@@ -6,8 +6,7 @@
     "scripts": {
         "lint": "eslint --ext .js,.vue src",
         "dev": "webpack-dev-server --mode development",
-        "build123": "webpack --mode production",
-        "build": "webpack --mode development",
+        "build": "webpack --mode production",
         "deploy": "gh-pages -d dist"
     },
     "keywords": [],
@@ -40,7 +39,9 @@
         "axios": "^0.18.0",
         "highlight.js": "^9.12.0",
         "marked": "^0.4.0",
+        "store": "^2.0.12",
         "vue": "^2.5.16",
+        "vue-loading-template": "^1.3.0",
         "vue-router": "^3.0.1",
         "vuex": "^3.0.1"
     }

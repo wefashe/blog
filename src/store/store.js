@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import loading from '@/vuex/modules/loading';
+import loading from '@/store/modules/loading';
 
 Vue.use(Vuex)
 

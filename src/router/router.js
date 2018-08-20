@@ -7,21 +7,34 @@ import NotFound from '@/pages/NotFound';
 Vue.use(Router);
 const router = new Router({
     // mode: "history",
-    routes: [{
-            path: '/',
+    routes: [
+        {
+        path: "/",
+        redirect: "/list",
+    },
+        {
+            path: '/list',
             name: 'list',
             component: list,
             meta: {
                 keepAlive: true,
                 title: document.title,
                 // scrollToTop: true
-            }
+            },
+            // children: [
+            //     {
+            //         path: '/detail',
+            //         name: 'detail',
+            //         component: detail,
+            //         meta: {keepAlive: false}
+            //     },
+            // ],
         },
         {
             path: '/detail',
             name: 'detail',
             component: detail,
-            meta:{keepAlive:false}
+            meta: {keepAlive: false}
         },
         {
             path: '*',
@@ -48,7 +61,6 @@ router.beforeEach((to, from, next) => {
     document.title = title;
     next()
 });
-
 
 
 export default router;

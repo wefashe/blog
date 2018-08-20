@@ -1,4 +1,4 @@
-import * as type from '@/vuex/type';
+import * as type from '@/store/type';
 const loading = {
     state: {
         //对状态进行定义

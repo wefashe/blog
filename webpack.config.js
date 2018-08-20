@@ -61,7 +61,7 @@ var webpackConfig = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: (config.nickname || config.username) + "'s Blog",
+      title: (config.nickname || config.username) + '\'s Blog',
       favicon: path.join(__dirname, 'static/favicon.ico'),
       filename: 'index.html',
       // hash: true,
