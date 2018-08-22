@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import Router from 'vue-router';
+// import Router from 'vue-router';
 import list from '@/pages/list';
 import detail from '@/pages/detail';
 import NotFound from '@/pages/NotFound';

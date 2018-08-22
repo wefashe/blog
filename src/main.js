@@ -25,7 +25,6 @@ const root = document.createElement('div');
 document.body.appendChild(root);
 
 new Vue({
-  1232222222
   store: store,
   router: router,
   render: (h) => h(App)

@@ -5,18 +5,17 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint src --fix --ext js,vue",
-    "fix": "eslint --fix src",
     "format": "prettier-eslint --write \"src/**/*.js\" \"src/**/*.vue\"",
     "dev": "webpack-dev-server --mode development",
     "build": "webpack --mode production",
-    "start-msg": "echo 'eslint start.........' && exit 0",
-    "end-msg": "echo 'eslint end,successful.........' && exit 0",
+    "precommit": "lint-staged",
     "deploy": "gh-pages -d dist"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint"
-    }
+  "lint-staged": {
+    "src/**/*.{js,vue}": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "keywords": [],
   "author": "wefashe",
