@@ -14,9 +14,6 @@
     "precommit": "npm run lint",
     "deploy": "gh-pages -d dist"
   },
-  "lint-staged": {
-    "*.js": ["eslint --fix", "git add"]
-  },
   "keywords": [],
   "author": "wefashe",
   "license": "ISC",
