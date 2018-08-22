@@ -10,17 +10,23 @@ module.exports = {
   //此项指定环境的全局变量，下面的配置指定为浏览器环境
   env: {
     browser: true,
-    // node: true,
-    // commonjs: true,
-    // es6: true,
+    node: true,
+    commonjs: true,
+    es6: true,
   },
   // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
   // 此项是用来配置标准的js风格，就是说写代码的时候要规范的写，如果你使用vs-code我觉得应该可以避免出错
-  extends: 'standard',
+  extends: [
+    'standard',
+    // 'plugin:vue/essential',
+    // 'eslint:recommended',
+    // 'plugin:prettier/recommended'
+  ],
   // required to lint *.vue files
   // 此项是用来提供插件的，插件名称省略了eslint-plugin-，下面这个配置是用来规范html的
   plugins: [
-    'html'
+    'html',
+    // 'prettier',
   ],
   // add your custom rules here
   // 下面这些rules是用来设置从插件来的规范代码的规则，使用必须去掉前缀eslint-plugin-
@@ -30,6 +36,8 @@ module.exports = {
   //"error" -> 2 开启错误规则
   // 了解了上面这些，下面这些代码相信也看的明白了
   rules: {
+    // "no-console": 0,
+    // "prettier/prettier": "error",
     // allow async-await
     // 'generator-star-spacing': 'off',
     // allow debugger during development
