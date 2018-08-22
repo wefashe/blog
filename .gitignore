@@ -3,3 +3,6 @@
 /dist
 *.iml
 .idea
+typings
+jsconfig.json
+typings.json

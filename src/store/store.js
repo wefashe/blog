@@ -6,7 +6,7 @@ import loading from '@/store/modules/loading';
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-    modules: {
-        loading,
-    },
+  modules: {
+    loading,
+  },
 })

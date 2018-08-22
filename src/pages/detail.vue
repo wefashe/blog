@@ -1,80 +1,80 @@
 <template>
-    <div class="post-detail">
-        <article class="post-article">
-            <!--<h2>{{item.title}}</h2>-->
-            <!--<span class="create_at">-->
-            <!--<a v-bind:href="item.html_url">-->
-              <!--<img width="40" height="40" v-bind:src="item.user.avatar_url" class="avatar">{{item.user.login}}</a>.-->
-        <!--发表于 {{formatDate(item.created_at)}},最后修改于{{formatDate(item.updated_at)}}</span>-->
-            <div class="d-block comment-body markdown-body  js-comment-body" v-html="marked(item.body)"></div>
-        </article>
-    </div>
+  <div class="post-detail">
+    <article class="post-article">
+      <!--<h2>{{item.title}}</h2>-->
+      <!--<span class="create_at">-->
+      <!--<a v-bind:href="item.html_url">-->
+      <!--<img width="40" height="40" v-bind:src="item.user.avatar_url" class="avatar">{{item.user.login}}</a>.-->
+      <!--发表于 {{formatDate(item.created_at)}},最后修改于{{formatDate(item.updated_at)}}</span>-->
+      <div class="d-block comment-body markdown-body  js-comment-body"
+        v-html="marked(item.body)"></div>
+    </article>
+  </div>
 </template>
 
 <script>
-    import marked from "marked";
-    import hljs from "highlight.js";
-    import "highlight.js/styles/atom-one-dark.css";
-    import bus from '@/util/bus';
+import marked from "marked";
+import hljs from "highlight.js";
+import "highlight.js/styles/atom-one-dark.css";
+// import bus from '@/util/bus';
 
-    export default {
-        data(){
-          return{
-              item:{}
+export default {
+  data () {
+    return {
+      item: {}
+    }
+  },
+  mounted () {
+    this.getDetail();
+    // this.bb(this.detail.body);
+    // this.bus();
+  },
+  methods: {
+    getDetail () {
+      this.item = this.$route.query;
+    },
+    marked (md) {
+      marked.setOptions({
+        renderer: new marked.Renderer(),
+        gfm: true, //启动Github样式的Markdown
+        tables: true, // 支持Github表格，必须打开gfm选项
+        breaks: true, //支持Github换行符，必须打开gfm选项
+        pedantic: false,
+        sanitize: false, //原始输出，忽略HTML标签
+        smartLists: true, //优化列表输出
+        smartypants: false,
+        highlight: function (code, lang) {
+          if (lang && hljs.getLanguage(lang)) {
+            return hljs.highlight(lang, code, true).value;
+          } else {
+            return hljs.highlightAuto(code).value;
           }
-        },
-        mounted() {
-            this.getDetail();
-            // this.bb(this.detail.body);
-            // this.bus();
-        },
-        methods: {
-            getDetail(){
-                this.item = this.$route.query;
-            },
-            marked(md) {
-                marked.setOptions({
-                    renderer: new marked.Renderer(),
-                    gfm: true, //启动Github样式的Markdown
-                    tables: true, // 支持Github表格，必须打开gfm选项
-                    breaks: true, //支持Github换行符，必须打开gfm选项
-                    pedantic: false,
-                    sanitize: false, //原始输出，忽略HTML标签
-                    smartLists: true, //优化列表输出
-                    smartypants: false,
-                    highlight: function (code, lang) {
-                        if (lang && hljs.getLanguage(lang)) {
-                            return hljs.highlight(lang, code, true).value;
-                        } else {
-                            return hljs.highlightAuto(code).value;
-                        }
-                    }
-                });
-                return marked(md || "", {sanitize: true});
-            },
-            formatDate(date) {
-                if (date != null) {
-                    var date = new Date(date);
-                    return (
-                        date.getFullYear() +
-                        "-" +
-                        (date.getMonth() + 1) +
-                        "-" +
-                        date.getDate()
-                    );
-                }
-            },
-            // bus(){
-            //     bus.$emit('title','传递参数');
-            // }
-        },
-        beforeRouteLeave(to, from, next) {
-            // to.meta.keepAlive = true;
-            next();
+        }
+      });
+      return marked(md || "", { sanitize: true });
+    },
+    formatDate (time) {
+      if (time != null) {
+        var date = new Date(time);
+        return (
+          date.getFullYear() +
+          "-" +
+          (date.getMonth() + 1) +
+          "-" +
+          date.getDate()
+        );
+      }
+    },
+    // bus(){
+    //     bus.$emit('title','传递参数');
+    // }
+  },
+  beforeRouteLeave (to, from, next) {
+    // to.meta.keepAlive = true;
+    next();
+  }
 
-        },
-
-    };
+};
 </script>
 
 <style lang="less" scoped>

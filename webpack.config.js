@@ -18,10 +18,10 @@ var webpackConfig = {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[hash].js'
   },
-  resolve:{
-    extensions:['.vue','.js', '.json'],
-    alias:{
-      '@':path.resolve('src')
+  resolve: {
+    extensions: ['.vue', '.js', '.json'],
+    alias: {
+      '@': path.resolve('src')
     }
   },
   module: {
@@ -57,15 +57,31 @@ var webpackConfig = {
           outputPath: 'images/',
         }
       }]
+    }, {
+      //关闭eslint编码规范验证，只需要把这个代码注释
+      test: /\.(js|vue)$/,
+      loader: 'eslint-loader',
+      enforce: 'pre',
+      include: [path.resolve('src')],
+      // include: path.resolve(__dirname, '..'),
+      // exclude: /node_modules/,
+      options: {
+        formatter: require('eslint-friendly-formatter'),
+        // 不符合Eslint规则时只警告(默认运行出错)
+        // emitWarning: !config.dev.showEslintErrorsInOverlay
+      }
     }],
   },
   plugins: [
+    new webpack.LoaderOptionsPlugin({
+      options: {}
+    }),
     new HtmlWebpackPlugin({
       title: (config.nickname || config.username) + '\'s Blog',
       favicon: path.join(__dirname, 'static/favicon.ico'),
       filename: 'index.html',
       // hash: true,
-      template:'index.html',
+      template: 'index.html',
       // showErrors: true,
       // inject: 'head', //js插入的位置，true/'head'/'body'/false
       minify: {
@@ -90,6 +106,5 @@ var webpackConfig = {
     open: true,
   }
 };
-
 
 module.exports = webpackConfig;

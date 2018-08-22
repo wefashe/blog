@@ -25,16 +25,15 @@ const root = document.createElement('div');
 document.body.appendChild(root);
 
 new Vue({
-    store:store,
-    router:router,
-    render:(h)=>h(App)
+  store: store,
+  router: router,
+  render: (h) => h(App)
 }).$mount(root);
 
 // const path = require('path');
 
 // console.log(path.join('/a', '/b'));
 // console.log(path.resolve('/a', '/b'));
-
 
 // console.log(path.join('a', 'b'));
 // console.log(path.resolve('a', 'b'));

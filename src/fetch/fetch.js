@@ -12,25 +12,24 @@ import config from '@/fetch/config'
 const instance = axios.create(config);
 // axios.defaults.timeout = 10000
 
-
 // 添加请求拦截器
 instance.interceptors.request.use(request => {
-    store.dispatch('showloader');
-    return request;
+  store.dispatch('showloader');
+  return request;
 }, error => {
-    store.dispatch('hideloader');
-    alert(error);
-    return Promise.reject(error);
+  store.dispatch('hideloader');
+  alert(error);
+  return Promise.reject(error);
 });
 
 // 添加响应拦截器
 instance.interceptors.response.use(response => {
-    store.dispatch('hideloader');
-    return response;
+  store.dispatch('hideloader');
+  return response;
 }, error => {
-    store.dispatch('hideloader');
-    alert(error);
-    return Promise.reject(error);
+  store.dispatch('hideloader');
+  alert(error);
+  return Promise.reject(error);
 });
 
 export default instance;
@@ -67,7 +66,6 @@ export default instance;
 //     })
 // }
 
-
 // export default {
 //     install: function (Vue) {
 //         Object.defineProperty(Vue.prototype, "$axios", {value: Axios});
@@ -81,8 +79,6 @@ export default instance;
 //         method: 'get'
 //     })
 // }
-
-
 
 // // 默认全部导出
 // export default {

@@ -1,19 +1,19 @@
 <template>
-    <div class="loading">
+  <div class="loading">
 
-    </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "",
-        data() {
-            return {
-                show:true,
-                msg:" 加载中，请稍后...",
-            };
-        }
+export default {
+  name: "",
+  data () {
+    return {
+      show: true,
+      msg: " 加载中，请稍后...",
     };
+  }
+};
 </script>
 
 <style lang='less' scoped>

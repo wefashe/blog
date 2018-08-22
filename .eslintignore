@@ -1,5 +1,8 @@
+放置需要ESLint忽略的文件，只对.js文件有效
+
 /build/
 /config/
 /dist/
 /src/utils/
 /src/router/*.js
+

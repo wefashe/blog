@@ -1,7 +1,7 @@
 export default {
     // method: 'get',
     // 基础url前缀
-    baseURL: 'https://api.github.com',
+  baseURL: 'https://api.github.com',
     // baseURL: 'https://api.github.com/repos/wefashe',
     // 请求头信息
     // headers: {

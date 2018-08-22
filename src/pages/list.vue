@@ -1,65 +1,67 @@
 <template>
-    <ul class="post-list">
-        <li class="post-li" v-for="item in list">
-            <router-link class="post-link" :to="{path:'/detail',query:item}">
-                {{item.title}}
-            </router-link>
-            <div class="post-meta">{{formatDate(item.created_at) }}</div>
-        </li>
-    </ul>
+  <ul class="post-list">
+    <li class="post-li"
+      v-for="item in list">
+      <router-link class="post-link"
+        :to="{path:'/detail',query:item}">
+        {{item.title}}
+      </router-link>
+      <div class="post-meta">{{formatDate(item.created_at) }}</div>
+    </li>
+  </ul>
 </template>
 
 
 <script>
-    import {utils} from '@/util/utils';
-    export default {
-        name: "list",
-        data() {
-            return {
-                list: []
-            };
-        },
-        mounted() {
-            this.getList();
-        },
-        methods: {
-            getList() {
-                this.$api.issue
-                    .queryList()
-                    .then(response => {
-                        this.list = response.data;
-                        this.list.sort(function (a, b) {
-                            return a.created_at < b.created_at ? 1 : -1;
-                        });
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
-            },
-            formatDate(date){
-                utils.formatDate(date);
-            },
-            // getTwoBit(n) {
-            //     return (n > 9 ? '' : '0') + n;
-            // },
-            // formatDate(date) {
-            //     if (date != null) {
-            //         var date = new Date(date);
-            //         return (
-            //             date.getFullYear() +
-            //             "-" +
-            //             this.getTwoBit(date.getMonth() + 1) +
-            //             "-" +
-            //             this.getTwoBit(date.getDate())
-            //         );
-            //     }
-            // }
-        },
-        beforeRouteLeave(to, from, next) {
-            // to.meta.keepAlive = false;
-            next();
-        }
+// import { utils } from '@/util/utils';
+export default {
+  name: "list",
+  data () {
+    return {
+      list: []
     };
+  },
+  mounted () {
+    this.getList();
+  },
+  methods: {
+    getList () {
+      this.$api.issue
+        .queryList()
+        .then(response => {
+          this.list = response.data;
+          this.list.sort(function (a, b) {
+            return a.created_at < b.created_at ? 1 : -1;
+          });
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    // formatDate (date) {
+    //   utils.formatDate(date);
+    // },
+    getTwoBit (n) {
+      return (n > 9 ? '' : '0') + n;
+    },
+    formatDate (time) {
+      if (time != null) {
+        var date = new Date(time);
+        return (
+          date.getFullYear() +
+          "-" +
+          this.getTwoBit(date.getMonth() + 1) +
+          "-" +
+          this.getTwoBit(date.getDate())
+        );
+      }
+    }
+  },
+  beforeRouteLeave (to, from, next) {
+    // to.meta.keepAlive = false;
+    next();
+  }
+};
 </script>
 
 

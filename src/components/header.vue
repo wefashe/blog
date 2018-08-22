@@ -1,28 +1,30 @@
 <template>
-    <header class="header">
-        <!--<router-link to="/"><div class="title">我是头部</div> </router-link>  -->
-        <h1>
-            <a class="site-title" rel="author" v-bind:href="url">{{title}}</a>
-        </h1>
-    </header>
+  <header class="header">
+    <!--<router-link to="/"><div class="title">我是头部</div> </router-link>  -->
+    <h1>
+      <a class="site-title"
+        rel="author"
+        v-bind:href="url">{{title}}</a>
+    </h1>
+  </header>
 </template>
 
 <script>
-    import bus from '@/util/bus';
-    export default {
-        name: "",
-        data() {
-            return {
-                title: 'Wenfs\'s Blog',
-                url: '/'
-            };
-        },
-        // created() {
-        //     bus.$on('titie',(e)=>{
-        //         this.title=e;
-        //     });
-        // }
+// import bus from '@/util/bus';
+export default {
+  name: "",
+  data () {
+    return {
+      title: 'Wenfs\'s Blog',
+      url: '/'
     };
+  },
+  // created() {
+  //     bus.$on('titie',(e)=>{
+  //         this.title=e;
+  //     });
+  // }
+};
 </script>
 
 <style lang='less' scoped>
