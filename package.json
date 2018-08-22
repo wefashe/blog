@@ -12,7 +12,17 @@
     "precommit-msg": "echo 'Pre-commit checks.........' && exit 0",
     "deploy": "gh-pages -d dist"
   },
-  "pre-commit": ["precommit-msg", "lint"],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "app/**/*.{js,jsx,vue}": [
+      "eslint",
+      "git add"
+    ]
+  },
   "keywords": [],
   "author": "wefashe",
   "license": "ISC",
