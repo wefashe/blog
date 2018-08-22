@@ -11,7 +11,7 @@
     "build": "webpack --mode production",
     "start-msg": "echo 'eslint start.........' && exit 0",
     "end-msg": "echo 'eslint end,successful.........' && exit 0",
-    "pre-commit": "lint-staged",
+    "precommit": "npm run lint",
     "deploy": "gh-pages -d dist"
   },
   "lint-staged": {
