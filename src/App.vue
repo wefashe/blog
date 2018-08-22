@@ -31,7 +31,7 @@ import { mapGetters } from "vuex";
 export default {
   components: {
     Header,
-    Footer
+    Footer,
     VueLoading
   },
   computed: mapGetters(["showLoading"])
