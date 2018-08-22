@@ -12,6 +12,10 @@
     "deploy": "gh-pages -d dist",
     "precommit": "lint-staged"
   },
+  "pre-commit": [
+    "precommit",
+    "lint"
+  ],
   "lint-staged": {
     "app/**/*.{js,jsx,vue}": "npm run lint"
   },
