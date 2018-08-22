@@ -25,7 +25,7 @@ const root = document.createElement('div');
 document.body.appendChild(root);
 
 new Vue({
-  123432
+  123412
   store: store,
   router: router,
   render: (h) => h(App)
