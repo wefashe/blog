@@ -25,7 +25,7 @@ export default {
     this.getList();
   },
   methods: {
-    getList () {      456
+    getList () {      11111
       this.$api.issue
         .queryList()
         .then(response => {

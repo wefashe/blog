@@ -10,16 +10,12 @@
     "dev": "webpack-dev-server --mode development",
     "build": "webpack --mode production",
     "precommit-msg": "echo 'Pre-commit checks.........' && exit 0",
+    "precommit": "lint-staged",
     "deploy": "gh-pages -d dist"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "lint-staged": {
     "app/**/*.{js,jsx,vue}": [
-      "eslint",
+      "lint",
       "git add"
     ]
   },
