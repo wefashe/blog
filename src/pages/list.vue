@@ -1,9 +1,9 @@
 <template>
   <ul class="post-list">
     <li class="post-li"
-      v-for="item in list">
+        v-for="item in list">
       <router-link class="post-link"
-        :to="{path:'/detail',query:item}">
+                   :to="{path:'/detail',query:item}">
         {{item.title}}
       </router-link>
       <div class="post-meta">{{formatDate(item.created_at) }}</div>
@@ -25,7 +25,7 @@ export default {
     this.getList();
   },
   methods: {
-    getList () {
+    getList () {      123
       this.$api.issue
         .queryList()
         .then(response => {
@@ -66,40 +66,40 @@ export default {
 
 
 <style lang="less" scoped>
-    //电脑
-    @media (min-width: 992px) {
-        .post-list {
-            margin-top: 28px;
-        }
-    }
+//电脑
+@media (min-width: 992px) {
+  .post-list {
+    margin-top: 28px;
+  }
+}
 
-    //手机
-    @media (max-width: 992px) {
-        .post-list {
-            margin-top: 20px;
-        }
-    }
+//手机
+@media (max-width: 992px) {
+  .post-list {
+    margin-top: 20px;
+  }
+}
 
-    a:hover {
-        text-decoration: none;
-        color: #0056b3;
-        background-color: transparent;
-    }
+a:hover {
+  text-decoration: none;
+  color: #0056b3;
+  background-color: transparent;
+}
 
-    li {
-        list-style-type: none;
-    }
+li {
+  list-style-type: none;
+}
 
-    .post-meta {
-        text-align: right;
-        font-size: 15px;
-    }
+.post-meta {
+  text-align: right;
+  font-size: 15px;
+}
 
-    .post-li {
-        display: -webkit-flex;
-        flex-direction: row;
-        justify-content: space-between;
-        display: flex;
-        margin-bottom: 15px;
-    }
+.post-li {
+  display: -webkit-flex;
+  flex-direction: row;
+  justify-content: space-between;
+  display: flex;
+  margin-bottom: 15px;
+}
 </style>

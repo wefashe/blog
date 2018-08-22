@@ -10,9 +10,9 @@ module.exports = {
   //此项指定环境的全局变量，下面的配置指定为浏览器环境
   env: {
     browser: true,
-    node: true,
-    commonjs: true,
-    es6: true,
+    // node: true,
+    // commonjs: true,
+    // es6: true,
   },
   // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
   // 此项是用来配置标准的js风格，就是说写代码的时候要规范的写，如果你使用vs-code我觉得应该可以避免出错
@@ -25,6 +25,7 @@ module.exports = {
   // required to lint *.vue files
   // 此项是用来提供插件的，插件名称省略了eslint-plugin-，下面这个配置是用来规范html的
   plugins: [
+    'vue',
     'html',
     // 'prettier',
   ],
@@ -163,14 +164,14 @@ module.exports = {
     // "no-label-var": 2, //不允许标签和变量同名
     // "no-shadow": 2, //外部作用域中的变量不能与它所包含的作用域中的变量或参数同名
     // "no-shadow-restricted-names": 2, //js关键字和保留字不能作为函数名或者变量名
-    // "no-undef": 2, //不允许未声明的变量
+    "no-undef": 2, //不允许未声明的变量
     // "no-undef-init": 2, //不允许初始化变量时给变量赋值undefined
     // "no-undefined": 2, //不允许把undefined当做标识符使用
     // "no-unused-vars": [2, {
     //   "vars": "all",
     //   "args": "after-used"
     // }], //不允许有声明后未使用的变量或者参数
-    // "no-use-before-define": [2, "nofunc"], //不允许在未定义之前就使用变量"indent": 2, //强制一致的缩进风格
+    "no-use-before-define": [2, "nofunc"], //不允许在未定义之前就使用变量"indent": 2, //强制一致的缩进风格
     // "brace-style": [2, "1tbs", {
     //   "allowSingleLine": false
     // }], //大括号风格

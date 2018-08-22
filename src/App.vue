@@ -30,7 +30,7 @@ import { mapGetters } from "vuex";
 
 export default {
   components: {
-    Header
+    Header,
     Footer,
     VueLoading
   },

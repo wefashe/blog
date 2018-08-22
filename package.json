@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint --ext .js,.vue src",
+    "lint": "eslint src --fix --ext js,vue",
     "fix": "eslint --fix src",
     "format": "prettier-eslint --write \"src/**/*.js\" \"src/**/*.vue\"",
     "dev": "webpack-dev-server --mode development",
