@@ -15,5 +15,5 @@ module.exports = {
   "arrowParens": "avoid", // (x) => {} 是否要有小括号
   "requirePragma": false, // 是否要注释来决定是否格式化代码
   "proseWrap": "preserve", // 是否要换行
-  "parser": "flow" //代码的解析引擎，默认为babylon，与babel相同。
+  // "parser": "flow" //代码的解析引擎，默认为babylon，与babel相同。
 }
