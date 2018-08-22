@@ -13,7 +13,7 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "app/**/*.{js,jsx,vue}": "eslint"
+    "app/**/*.{js,jsx,vue}": "npm run lint"
   },
   "keywords": [],
   "author": "wefashe",
