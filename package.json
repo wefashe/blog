@@ -8,7 +8,7 @@
     "format": "prettier-eslint --write \"src/**/*.js\" \"src/**/*.vue\"",
     "dev": "webpack-dev-server --mode development",
     "build": "webpack --mode production",
-    "precommit": "lint-staged",
+    "precommit": "npm run lint",
     "deploy": "gh-pages -d dist"
   },
   "lint-staged": {
