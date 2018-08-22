@@ -9,15 +9,18 @@
     "format": "prettier-eslint --write \"src/**/*.js\" \"src/**/*.vue\"",
     "dev": "webpack-dev-server --mode development",
     "build": "webpack --mode production",
-    "deploy": "gh-pages -d dist",
-    "precommit": "lint-staged"
+    "deploy": "gh-pages -d dist"
   },
-  "pre-commit": [
-    "precommit",
-    "lint"
-  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "lint-staged": {
-    "app/**/*.{js,jsx,vue}": "npm run lint"
+    "app/**/*.{js,jsx,vue}": [
+      "eslint",
+      "git add"
+    ]
   },
   "keywords": [],
   "author": "wefashe",
