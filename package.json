@@ -9,12 +9,14 @@
     "format": "prettier-eslint --write \"src/**/*.js\" \"src/**/*.vue\"",
     "dev": "webpack-dev-server --mode development",
     "build": "webpack --mode production",
-    "precommit-msg1": "echo 'Pre-commit111 checks.........' && exit 0",
-    "precommit-msg2": "echo 'Pre-commit222 checks.........' && exit 0",
+    "start-msg": "echo 'eslint start.........' && exit 0",
+    "end-msg": "echo 'eslint end,successful.........' && exit 0",
     "precommit": "lint-staged",
     "deploy": "gh-pages -d dist"
   },
-  "pre-commit": ["precommit-msg1", "precommit-msg2"],
+  "lint-staged": {
+    "*.js": ["eslint --fix", "git add"]
+  },
   "keywords": [],
   "author": "wefashe",
   "license": "ISC",
