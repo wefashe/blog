@@ -59,6 +59,7 @@ module.exports = {
     // 'no-unused-vars': 0,
     // 要求或禁止末尾逗号
     'comma-dangle': 0,
+    'no-useless-computed-key': 0,
 
     // 不能用多余的空格
     // "no-multi-spaces": 1,

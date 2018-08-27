@@ -24,6 +24,12 @@ Vue.use(api);
 const root = document.createElement('div');
 document.body.appendChild(root);
 
+// Vue.directive('title', {
+//   inserted: function (el, binding) {
+//     document.title = el.dataset.title
+//   }
+// });
+
 new Vue({
   store: store,
   router: router,

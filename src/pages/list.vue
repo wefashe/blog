@@ -2,11 +2,11 @@
   <ul class="post-list">
     <li class="post-li"
         v-for="item in list">
-      <router-link class="post-link"
-                   :to="{path:'/detail',query:item}">
-        {{item.title}}
-      </router-link>
-      <div class="post-meta">{{formatDate(item.created_at) }}</div>
+      <router-link :to="{name:'detail'}"
+                   @click.native="sendMsg(item)">{{item.title}}</router-link>
+      <div class="
+         post-meta
+         ">{{formatDate(item.created_at) }}</div>
     </li>
   </ul>
 </template>
@@ -14,6 +14,7 @@
 
 <script>
 // import { utils } from '@/util/utils';
+// import bus from '@/util/utils';
 export default {
   name: "list",
   data () {
@@ -55,7 +56,13 @@ export default {
           this.getTwoBit(date.getDate())
         );
       }
-    }
+    },
+    sendMsg (item) {
+      this.$store.commit('SET_DETAIL', item);
+      // this.$router.push({
+      //   name: 'detail'
+      // });
+    },
   },
   beforeRouteLeave (to, from, next) {
     // to.meta.keepAlive = false;

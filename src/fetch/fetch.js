@@ -34,6 +34,26 @@ instance.interceptors.response.use(response => {
 
 export default instance;
 
+// export default function request (method, url, data) {
+//   // 处理请求的url和数据
+//   data = method === 'get' ? { params: data } : data
+//   // 发送请求
+//   return new Promise((resolve, reject) => {
+//     axios[method](url, data)
+//       .then(response => {
+//         resolve(response)
+//       }, error => {
+//         reject(error)
+//       })
+//       .catch(error => {
+//         reject(error)
+//       })
+//   })
+//   .catch(error => {
+//     console.log(error)
+//   })
+// }
+
 // // 封装请求
 // export function fetch(url, options) {
 //     var opt = options || {}

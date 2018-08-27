@@ -18,6 +18,12 @@ var webpackConfig = {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[hash].js'
   },
+  // externals: {
+  //   'vue': 'Vue',
+  //   'vue-router': 'VueRouter',
+  //   'vuex': 'Vuex',
+  //   'axios': 'axios'
+  // },
   resolve: {
     extensions: ['.vue', '.js', '.json'],
     alias: {
@@ -104,6 +110,9 @@ var webpackConfig = {
     },
     hot: true, //模块热替换
     open: true,
+    historyApiFallback: {
+      index: 'index.html'
+    }
   }
 };
 

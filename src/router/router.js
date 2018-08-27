@@ -8,14 +8,14 @@ Vue.use(Router);
 const router = new Router({
   // mode: "history",
   routes: [{
-    path: "/",
-    redirect: "/list",
-  },
-  {
-    path: '/list',
-    name: 'list',
-    component: list,
-    meta: {
+      path: "/", // 默认进入路由[写在第一个]
+      redirect: "/list",
+    },
+    {
+      path: '/list',
+      name: 'list',
+      component: list,
+      meta: {
         keepAlive: true,
         title: document.title,
         // scrollToTop: true
@@ -28,19 +28,19 @@ const router = new Router({
       //         meta: {keepAlive: false}
       //     },
       // ],
-  },
-  {
-    path: '/detail',
-    name: 'detail',
-    component: detail,
-    meta: {
+    },
+    {
+      path: '/post',
+      name: 'detail',
+      component: detail,
+      meta: {
         keepAlive: false
       }
-  },
-  {
-    path: '*',
-    component: NotFound
-  }
+    },
+    {
+      path: '**', // 错误路由[写在最后一个]
+      redirect: '/list' //重定向
+    }
   ],
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
@@ -54,13 +54,13 @@ const router = new Router({
   },
 })
 
-router.beforeEach((to, from, next) => {
-  var title = to.query.title || document.title;
-  if (to.meta.title) {
-    title = to.meta.title
-  }
-  document.title = title;
-  next()
-});
+// router.beforeEach((to, from, next) => {
+//   var title = to.query.title || document.title;
+//   if (to.meta.title) {
+//     title = to.meta.title
+//   }
+//   document.title = title;
+//   next()
+// });
 
 export default router;
